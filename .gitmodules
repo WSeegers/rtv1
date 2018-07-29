@@ -1,3 +1,9 @@
 [submodule "toolkit-wtc"]
 	path = toolkit-wtc
 	url = https://github.com/wseegers/toolkit-wtc
+[submodule "libwtcc"]
+	path = libwtcc
+	url = https://github.com/wseegers/libwtcc
+[submodule "libmatrix"]
+	path = libmatrix
+	url = https://github.com/WSeegers/libmatrix.git

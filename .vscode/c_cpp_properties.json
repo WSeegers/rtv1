@@ -4,8 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/toolkit-wtc/libwtcfx/include",
-                "${workspaceFolder}/toolkit-wtc/libwtcc/include"
+                "${workspaceFolder}/libwtcc/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
