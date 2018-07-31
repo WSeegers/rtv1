@@ -6,14 +6,14 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:56:25 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/29 22:23:14 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/31 16:08:32 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "f_math.h"
 
-bool	cast_ray(t_ray ray, t_scene scene, t_intersect *intercect)
+bool	cast_ray(t_ray ray, t_vshape_set scene, t_intersect *intercect)
 {
 	int i;
 	t_shape *shape;
@@ -21,7 +21,7 @@ bool	cast_ray(t_ray ray, t_scene scene, t_intersect *intercect)
 	t_colour col;
 
 	i = -1;
-	col = 0x00000000;
+	col = C_BLACK;
 	while (++i < scene->total)
 	{
 		shape = get_shape(scene, i);
@@ -54,7 +54,7 @@ void	set_ray(int x, int y, t_ray *ray, t_camera cam)
 	ray->d = vec3_normalize(vec3_add(vec3_add(fwd, up), right));
 }
 
-void	generate_screen(t_camera cam, t_scene scene)
+void	generate_screen(t_camera cam, t_vshape_set scene)
 {
 	int		x;
 	int		y;
@@ -69,20 +69,13 @@ void	generate_screen(t_camera cam, t_scene scene)
 		while (++x < SCREEN_WIDTH)
 		{
 			set_ray(x, y, &ray, cam);
-			col = 0x00000000;
+			col = C_BLACK;
 			if (cast_ray(ray, scene, &intersect))
 			{
 				// test
 				col = intersect.shape->colour;
-				double scale = fabs(vec3_dot(ray.d, intersect.normal));
-				//vec3_print("norm", intersect.normal);
-				//printf("scale: %f\n", scale);
-				col = (col & 0xff00ffff) |
-					(CLAMP(((int)(((col & 0x00ff0000) >> 16) * scale)), 0, 0xff) << 16);
-				col = (col & 0xffff00ff) |
-					(CLAMP(((int)(((col & 0x0000ff00) >> 8) * scale)), 0, 0xff) << 8);
-				col = (col & 0xffffff00) |
-					CLAMP(((int)(((col & 0x000000ff)) * scale)), 0, 0xff);
+				col = colour_multiply(col, AMBIENT_LIGHT);
+				
 			}
 			putpixel(x, y, col);
 		}

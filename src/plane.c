@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 14:03:22 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/29 22:09:27 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/31 14:21:09 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ bool		plane_does_intersect(void *shape, t_ray ray)
 	double	t;
 
 	plane = (t_plane*)shape;
-	dot = fabs(vec3_dot(ray.d, plane->n));
-	if (!dot)
+	dot = vec3_dot(ray.d, plane->n);
+	if (fabs(dot) < DOT_MIN)
 		return (false);
-	t = vec3_dot(plane->p, ray.d) / dot;
+	t = vec3_dot(vec3_subtract(plane->p, ray.p), plane->n) / dot;
 	if (t <= RAY_T_MIN || t >= ray.t_max)
 		return (false);
 	return (true);
@@ -51,14 +51,10 @@ bool	plane_intersect(void *shape, t_ray ray, t_intersect *intersect)
 	double	t;
 
 	plane = (t_plane*)shape;
-	dot = fabs(vec3_dot(ray.d, plane->n));
-	//printf("ray: (%f, %f, %f)\n", ray.d.x, ray.d.y, ray.d.z);
-	//printf("plane_n: (%f, %f, %f)\n", plane->n.x, plane->n.y, plane->n.z);
-	//printf("%f\n", dot);
-	//exit(0);
-	if (!dot)
+	dot = vec3_dot(ray.d, plane->n);
+	if (fabs(dot) < DOT_MIN)
 		return (false);
-	t = vec3_dot(plane->p, ray.d) / dot;
+	t = vec3_dot(vec3_subtract(plane->p, ray.p), plane->n) / dot;
 	if (t <= RAY_T_MIN || t >= ray.t_max)
 		return (false);
 	intersect->ray = ray;

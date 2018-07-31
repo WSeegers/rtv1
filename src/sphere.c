@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 19:07:51 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/29 22:15:57 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/31 14:21:24 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ t_sphere	*create_sphere(t_vec3 center, double radius, t_colour colour)
 
 	sphere = f_memalloc(sizeof(t_sphere));
 	sphere->center = center;
-	//printf("%p -", sphere);
-	//vec3_print("center", sphere->center);
 	sphere->radius = radius;
 	sphere->colour = colour;
 	sphere->does_intersect = sphere_does_intersect;

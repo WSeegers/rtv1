@@ -6,13 +6,18 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:29:46 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/28 23:33:03 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/31 14:24:27 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void putpixel(int x, int y, Uint32 pixel)
+void putpixel(int x, int y, t_colour pixel)
+{
+	putipixel(x, y, colour_to_int(pixel));
+}
+
+void putipixel(int x, int y, Uint32 pixel)
 {
     int bpp = g_wsurface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to set */

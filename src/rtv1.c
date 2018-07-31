@@ -6,37 +6,41 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/29 22:26:22 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/31 16:06:59 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static void	init_scene(t_scene scene)
+static void	init_vshape_set(t_vshape_set scene)
 {
-	t_plane 	*red;
-	t_plane		*blue;
+	t_plane 	*left_wall; //r
+	t_plane		*back_wall; //g
+	t_plane		*right_wall; //b
+	t_plane		*pfloor;
 	t_sphere	*s;
 
-	//red = create_plane(VEC3(0, 0, 5), VEC3(-1, 0, -1), 0x00ff0000);
-	//add_shape(scene, (t_shape*)red);
+	left_wall = create_plane(VEC3(-10, 0, 0), VEC3(1, 0, 0), C_RED);
+	add_shape(scene, (t_shape*)left_wall);
 
-	//blue = create_plane(VEC3(0, 0, 5), VEC3(1.5, 0.5, -1), 0x000000ff);
-	//add_shape(scene, (t_shape*)blue);
+	left_wall = create_plane(VEC3(10, 0, 0), VEC3(-1, 0, 0), C_GREEN);
+	add_shape(scene, (t_shape*)left_wall);
 
-	s = create_sphere(VEC3(-1, -1, 6), 4, 0x00ff00ff);
-	add_shape(scene, (t_shape*)s);
+	back_wall = create_plane(VEC3(0, 0, 20), VEC3(0, 0, -1), C_BLUE);
+	add_shape(scene, (t_shape*)back_wall);
 
-	s = create_sphere(VEC3(1, 1, 6), 3, 0x0000ff00);
-	add_shape(scene, (t_shape*)s);
+	pfloor = create_plane(VEC3(0, 0, 0), VEC3(0, -1, 0), COLOUR(1.0, 0.5, 0.5));
+	add_shape(scene, (t_shape*)pfloor);
 
-	s = create_sphere(VEC3(0, 2, 3), 2, 0x00ffffff);
+	s = create_sphere(VEC3(-2, 2, 5), 2, COLOUR(1.0, 0, 1));
 	add_shape(scene, (t_shape*)s);
 }
 
 static	void init_camera(t_camera *cam)
 {
-	camera_set(VEC3(0, 0, -2), VEC3(0, 0, 5), cam);
+	camera_set(VEC3(2, 5, -2), VEC3(0, 2, 5), cam);
+	vec3_print("orig:", cam->origin);
+	vec3_print("fwd:", cam->forward);
 }
 
 static	bool init(void)
@@ -83,13 +87,13 @@ static void loop(void)
 int	main(void)
 {
 	t_camera	cam;
-	t_scene		scene;
+	t_vshape_set		scene;
 
 	if (!init())
 		SDL_Quit();
 	init_camera(&cam);
-	scene = scene_create();
-	init_scene(scene);
+	scene = vshape_set_create();
+	init_vshape_set(scene);
 	generate_screen(cam, scene);
 	SDL_UpdateWindowSurface(g_window);
 	loop();
