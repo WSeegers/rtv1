@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+         #
+#    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/07/31 19:28:09 by wseegers         ###   ########.fr        #
+#    Updated: 2018/08/01 13:15:03 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ CC = clang
 #CFLAGS = -Werror -Wall -Wextra
 CFLAGS =
 SDL2 = `sdl2-config --cflags --libs`
-INC = -I libwtcc/include -I libmatrix
-LIB = -L ./ -lwtcc -lm
+INC = -I libwtcc/include -I libmatrix -I include
+LIB = -L ./libwtcc -lwtcc
 
 SRC_PATH = src
 ALL_SRC = $(wildcard src/*.c)
@@ -24,6 +24,15 @@ SRC = $(ALL_SRC:src/%=%)
 BIN_PATH = bin
 BIN := $(SRC:%.c=$(BIN_PATH)/%.o)
 DEP := $(BIN:%.o=%.d)
+
+OS := $(shell uname)
+ifeq ($(OS), Darwin)
+	./SDL_mac_install.sh
+	SDL2 = -L ~/lib -lSDL2
+else
+	SDL2 = `sdl2-config --cflags --libs`
+	LIB += -lm
+endif
 
 all : make_LIB $(NAME)
 	@echo "wseegers" > author
@@ -45,6 +54,7 @@ clean :
 
 fclean : clean
 	rm -f $(NAME)
+	rm -rf SDL2-2.0.8
 	make fclean -C libwtcc
 
 re : fclean all
