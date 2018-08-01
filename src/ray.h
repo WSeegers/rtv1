@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/29 16:22:27 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 16:06:59 by wseegers         ###   ########.fr       */
+/*   Created: 2018/07/31 16:21:15 by wseegers          #+#    #+#             */
+/*   Updated: 2018/07/31 18:16:40 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#ifndef	RAY_H
+# define RAY_H
 
-t_vshape_set	vshape_set_create(void)
-{
-	return (vector_create());
-}
+# define DOT_MIN	(1e-6)
+# define RAY_T_MIN	(1e-6)
+# define RAY_T_MAX	(1.0e30)
 
-void	add_shape(t_vshape_set scene, t_shape *shape)
-{
-	vector_add(scene, shape);
-}
+# include "vec3.h"
 
-t_shape *get_shape(t_vshape_set scene, int index)
+typedef	struct	s_ray
 {
-	return ((t_shape*)vector_get(scene, index));
-}
+	t_vec3	p;
+	t_vec3	d;
+	double	t_max;
+}				t_ray;
+
+# define RAY(p, d)	((t_ray){p, d, RAY_T_MAX})
+
+t_vec3	ray_calculate(t_ray ray, double t);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 14:03:22 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 14:21:09 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/31 19:18:50 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "rtv1.h"
 #include "f_memory.h"
 
-t_plane	*create_plane(t_vec3 point, t_vec3 normal, t_colour colour)
+t_plane	*plane_create(t_vec3 point, t_vec3 normal, t_colour colour)
 {
 	t_plane	*plane;
 

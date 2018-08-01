@@ -6,7 +6,7 @@
 #    By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/07/29 18:22:19 by wseegers         ###   ########.fr        #
+#    Updated: 2018/07/31 19:28:09 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ clean :
 
 fclean : clean
 	rm -f $(NAME)
-	make fclean -C toolkit-wtc
+	make fclean -C libwtcc
 
 re : fclean all
 

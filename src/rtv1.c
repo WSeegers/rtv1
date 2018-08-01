@@ -6,41 +6,49 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 16:06:59 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/07/31 20:09:31 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static void	init_vshape_set(t_vshape_set scene)
+static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 {
 	t_plane 	*left_wall; //r
 	t_plane		*back_wall; //g
 	t_plane		*right_wall; //b
 	t_plane		*pfloor;
 	t_sphere	*s;
+	t_light		*light;
 
-	left_wall = create_plane(VEC3(-10, 0, 0), VEC3(1, 0, 0), C_RED);
-	add_shape(scene, (t_shape*)left_wall);
+	left_wall = plane_create(VEC3(-10, 0, 0), VEC3(1, 0, 0), C_RED);
+	add_shape(shapes, (t_shape*)left_wall);
 
-	left_wall = create_plane(VEC3(10, 0, 0), VEC3(-1, 0, 0), C_GREEN);
-	add_shape(scene, (t_shape*)left_wall);
+	right_wall = plane_create(VEC3(10, 0, 0), VEC3(-1, 0, 0), C_GREEN);
+	add_shape(shapes, (t_shape*)right_wall);
 
-	back_wall = create_plane(VEC3(0, 0, 20), VEC3(0, 0, -1), C_BLUE);
-	add_shape(scene, (t_shape*)back_wall);
+	back_wall = plane_create(VEC3(0, 0, 20), VEC3(0, 0, -1), C_BLUE);
+	add_shape(shapes, (t_shape*)back_wall);
 
-	pfloor = create_plane(VEC3(0, 0, 0), VEC3(0, -1, 0), COLOUR(1.0, 0.5, 0.5));
-	add_shape(scene, (t_shape*)pfloor);
+	pfloor = plane_create(VEC3(0, 0, 0), VEC3(0, 1, 0), COLOUR(1.0, 0.5, 0.5));
+	add_shape(shapes, (t_shape*)pfloor);
 
-	s = create_sphere(VEC3(-2, 2, 5), 2, COLOUR(1.0, 0, 1));
-	add_shape(scene, (t_shape*)s);
+	s = create_sphere(VEC3(5, 2, 5), 2, COLOUR(1.0, 0, 1));
+	add_shape(shapes, (t_shape*)s);
+
+	s = create_sphere(VEC3(-4, 3, 5), 3, COLOUR(1.0, 0, 1));
+	add_shape(shapes, (t_shape*)s);
+
+	light = light_create(VEC3(4, 20, 0), colour_scale(C_WHITE, 0.3));
+	add_light(lights, light);
+
+	light = light_create(VEC3(-2, 2, 0), colour_scale(C_WHITE, 1));
+	add_light(lights, light);
 }
 
 static	void init_camera(t_camera *cam)
 {
-	camera_set(VEC3(2, 5, -2), VEC3(0, 2, 5), cam);
-	vec3_print("orig:", cam->origin);
-	vec3_print("fwd:", cam->forward);
+	camera_set(VEC3(2, 5, -20), VEC3(0, 2, 5), cam);
 }
 
 static	bool init(void)
@@ -86,15 +94,20 @@ static void loop(void)
 
 int	main(void)
 {
-	t_camera	cam;
-	t_vshape_set		scene;
+	t_camera			cam;
+	t_vshape_set		shapes;
+	t_vlight_set		lights;
 
 	if (!init())
 		SDL_Quit();
 	init_camera(&cam);
-	scene = vshape_set_create();
-	init_vshape_set(scene);
-	generate_screen(cam, scene);
+	shapes = vshape_set_create();
+	lights = vlight_set_create();
+	puts("init scene");
+	init_scene(shapes, lights);
+	puts("generating shape");
+	generate_screen(cam, shapes, lights);
+	puts("blit");
 	SDL_UpdateWindowSurface(g_window);
 	loop();
 	

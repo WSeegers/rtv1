@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"rtv1.h": "c",
-		"cmath": "c"
+		"cmath": "c",
+		"shape.h": "c"
 	}
 }
