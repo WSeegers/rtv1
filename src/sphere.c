@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 19:07:51 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 14:21:24 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/01 19:29:15 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ bool		sphere_intersect(void *shape, t_ray ray, t_intersect *intersect)
 	double		b;
 	double		c;
 	double		des;
-	double		t[2];
+	double		t;
 
 	intersect->ray = ray;
 	sphere = (t_sphere*)shape;
@@ -60,14 +60,11 @@ bool		sphere_intersect(void *shape, t_ray ray, t_intersect *intersect)
 	des = (b * b) - (4 * c);
 	if (des < 0)
 		return (false);
-	t[0] = (-b - sqrt(des)) / 2.0;
-	t[1] = (-b + sqrt(des)) / 2.0;
-	if (t[0] > RAY_T_MIN && t[0] < ray.t_max)
-		intersect->t = t[0];
-	else if (t[1] > RAY_T_MIN && t[1] < ray.t_max)
-		intersect->t = t[1];
+	t = (-b - sqrt(des)) / 2.0;
+	if (t > RAY_T_MIN && t < ray.t_max)
+		intersect->t = t;
 	else
-		return(false);
+		return (false);
 	intersect->shape = shape;
 	intersect->normal = vec3_normalize(ray_calculate(ray, intersect->t));
 	return (true);

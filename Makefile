@@ -6,7 +6,7 @@
 #    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/08/01 13:15:03 by wseegers         ###   ########.fr        #
+#    Updated: 2018/08/01 13:46:51 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ DEP := $(BIN:%.o=%.d)
 
 OS := $(shell uname)
 ifeq ($(OS), Darwin)
-	./SDL_mac_install.sh
 	SDL2 = -L ~/lib -lSDL2
 else
 	SDL2 = `sdl2-config --cflags --libs`
@@ -38,6 +37,7 @@ all : make_LIB $(NAME)
 	@echo "wseegers" > author
 
 make_LIB :
+	./SDL_install.sh
 	make -C libwtcc
 
 $(NAME) : $(BIN)
@@ -55,6 +55,7 @@ clean :
 fclean : clean
 	rm -f $(NAME)
 	rm -rf SDL2-2.0.8
+	rm -rf include/SDL2
 	make fclean -C libwtcc
 
 re : fclean all

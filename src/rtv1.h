@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:58 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 20:03:50 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/01 14:03:03 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define LENS_WIDTH		(LENS_HEIGHT * ASPECT_RATIO)
 # define UP_GUIDE		(VEC3(0, 1, 0))
 
-# define AMBIENT_LIGHT	(COLOUR(0.15, 0.1, 0.1))
+# define AMBIENT_LIGHT	(COLOUR(0.15, 0.15, 0.15))
 
 SDL_Window	*g_window;
 SDL_Surface	*g_wsurface;

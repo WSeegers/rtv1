@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 20:09:31 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/02 02:06:41 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 	t_plane		*right_wall; //b
 	t_plane		*pfloor;
 	t_sphere	*s;
+	t_cylinder	*c;
 	t_light		*light;
 
 	left_wall = plane_create(VEC3(-10, 0, 0), VEC3(1, 0, 0), C_RED);
@@ -36,14 +37,29 @@ static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 	s = create_sphere(VEC3(5, 2, 5), 2, COLOUR(1.0, 0, 1));
 	add_shape(shapes, (t_shape*)s);
 
-	s = create_sphere(VEC3(-4, 3, 5), 3, COLOUR(1.0, 0, 1));
+	s = create_sphere(VEC3(0, 2, 0), 0.5, COLOUR(1.0, 0, 1));
 	add_shape(shapes, (t_shape*)s);
+
+	c = create_cylinder(VEC3(5, 2, 5), vec3_normalize(VEC3(1, 1, 0))
+		, 1, COLOUR(0.3, 0.6, 0.9));
+	add_shape(shapes, (t_shape*)c);
+
+	c = create_cylinder(VEC3(-5, 5, 5), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
+	add_shape(shapes, (t_shape*)c);
 
 	light = light_create(VEC3(4, 20, 0), colour_scale(C_WHITE, 0.3));
 	add_light(lights, light);
 
-	light = light_create(VEC3(-2, 2, 0), colour_scale(C_WHITE, 1));
+	light = light_create(VEC3(0, 5, 0), colour_scale(C_WHITE, 0.5));
 	add_light(lights, light);
+
+	// t_intersect	result;
+	// t_ray test_ray = RAY(VEC3(0, 2, -20), VEC3(0, 0, 1));
+	// printf("hit: %d\n", c->intersect(c, test_ray, &result));
+	// printf("t: %f\n", result.t);
+	// vec3_print("hit_point", ray_calculate(test_ray, result.t));
+	
+	// exit(0);
 }
 
 static	void init_camera(t_camera *cam)
@@ -105,7 +121,7 @@ int	main(void)
 	lights = vlight_set_create();
 	puts("init scene");
 	init_scene(shapes, lights);
-	puts("generating shape");
+	puts("generating scene");
 	generate_screen(cam, shapes, lights);
 	puts("blit");
 	SDL_UpdateWindowSurface(g_window);
