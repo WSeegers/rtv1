@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:58 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/04 10:21:35 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/04 21:15:01 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "light.h"
 # include "scene.h"
 # include "colour.h"
+# include "mat4.h"
 
 # define SCREEN_TITLE	"rtv1 - WSeegers"
 # define SCREEN_WIDTH	(640 * 2)

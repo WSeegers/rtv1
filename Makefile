@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
+#    By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/08/01 13:46:51 by wseegers         ###   ########.fr        #
+#    Updated: 2018/08/04 21:13:31 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ make_LIB :
 	make -C libwtcc
 
 $(NAME) : $(BIN)
-	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIB) $(SDL2) libmatrix/vec3.c
+	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIB) $(SDL2) libmatrix/*.c
 
 $(BIN_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(BIN_PATH)

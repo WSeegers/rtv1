@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:25:02 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/04 10:33:59 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/04 23:03:01 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct		s_cylinder
 	t_vec3			origin;
 	t_vec3			axis;
 	double			radius;
+	t_mat4			mat;
+	t_mat4			raymat;
 }					t_cylinder;
 
 t_cylinder	*create_cylinder(t_vec3 origin, t_vec3 axis,

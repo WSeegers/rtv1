@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/02 02:06:41 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/04 23:33:31 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,31 @@ static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 	pfloor = plane_create(VEC3(0, 0, 0), VEC3(0, 1, 0), COLOUR(1.0, 0.5, 0.5));
 	add_shape(shapes, (t_shape*)pfloor);
 
-	s = create_sphere(VEC3(5, 2, 5), 2, COLOUR(1.0, 0, 1));
+	s = create_sphere(VEC3(0, 3, 0), 3, COLOUR(1.0, 0, 1));
 	add_shape(shapes, (t_shape*)s);
 
-	s = create_sphere(VEC3(0, 2, 0), 0.5, COLOUR(1.0, 0, 1));
+	s = create_sphere(VEC3(0, 7, 0), 2, COLOUR(1.0, 0, 1));
 	add_shape(shapes, (t_shape*)s);
 
-	c = create_cylinder(VEC3(5, 2, 5), vec3_normalize(VEC3(1, 1, 0))
-		, 1, COLOUR(0.3, 0.6, 0.9));
+	c = create_cylinder(VEC3(8, 0, 8), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
 	add_shape(shapes, (t_shape*)c);
 
-	c = create_cylinder(VEC3(-5, 5, 5), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
+	c = create_cylinder(VEC3(-8, 0, 8), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
 	add_shape(shapes, (t_shape*)c);
 
-	light = light_create(VEC3(4, 20, 0), colour_scale(C_WHITE, 0.3));
+	c = create_cylinder(VEC3(-8, 0, 0), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
+	add_shape(shapes, (t_shape*)c);
+
+	c = create_cylinder(VEC3(8, 0, 0), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
+	add_shape(shapes, (t_shape*)c);
+
+	light = light_create(VEC3(4, 20, 5), colour_scale(C_WHITE, 0.1));
 	add_light(lights, light);
 
-	light = light_create(VEC3(0, 5, 0), colour_scale(C_WHITE, 0.5));
+	light = light_create(VEC3(0, 5, 0), colour_scale(C_WHITE, 0.3));
+	add_light(lights, light);
+
+	light = light_create(VEC3(5, 0.1, -3), colour_scale(C_WHITE, 0.2));
 	add_light(lights, light);
 
 	// t_intersect	result;
@@ -64,7 +72,7 @@ static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 
 static	void init_camera(t_camera *cam)
 {
-	camera_set(VEC3(2, 5, -20), VEC3(0, 2, 5), cam);
+	camera_set(VEC3(2, 10, -30), VEC3(0, 2, 5), cam);
 }
 
 static	bool init(void)
