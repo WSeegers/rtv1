@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:58 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/01 14:03:03 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/04 10:21:35 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include "ray.h"
 # include "s_vector.h"
 # include "shape.h"
+# include "light.h"
+# include "scene.h"
 # include "colour.h"
 
 # define SCREEN_TITLE	"rtv1 - WSeegers"
@@ -38,28 +40,11 @@
 SDL_Window	*g_window;
 SDL_Surface	*g_wsurface;
 
-typedef struct		s_light
-{
-	// point light
-	t_vec3		origin;
-	t_colour	colour;
-}					t_light;
-
-t_light			*light_create(t_vec3 origin, t_colour colour);
-void			init_light(t_light *light, t_vec3 origin, t_colour colour);
-
-typedef t_vector	*t_vlight_set;
-
-t_vlight_set		vlight_set_create(void);
-void				add_light(t_vlight_set scene, t_light *light);
-t_light 			*get_light(t_vlight_set scene, int index);
-
 typedef	struct 	s_intersect
 {
 	t_ray		ray;
 	t_shape		*shape;
 	double		t;
-	//t_colour	colour;
 	t_vec3		normal;
 }				t_intersect;
 

@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape.c                                            :+:      :+:    :+:   */
+/*   vlight_set.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/29 16:22:27 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 19:14:58 by wseegers         ###   ########.fr       */
+/*   Created: 2018/08/04 10:32:22 by wseegers          #+#    #+#             */
+/*   Updated: 2018/08/04 10:32:31 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "scene.h"
 
-t_vshape_set	vshape_set_create(void)
+t_vlight_set	vlight_set_create(void)
 {
 	return (vector_create());
 }
 
-void	add_shape(t_vshape_set scene, t_shape *shape)
+void	add_light(t_vlight_set scene, t_light *light)
 {
-	vector_add(scene, shape);
+	vector_add(scene, light);
 }
 
-t_shape *get_shape(t_vshape_set scene, int index)
+t_light *get_light(t_vlight_set scene, int index)
 {
-	return ((t_shape*)vector_get(scene, index));
+	return ((t_light*)vector_get(scene, index));
 }

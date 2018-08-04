@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:25:02 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/02 00:40:42 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/04 10:33:59 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_H
 # define SHAPE_H
 
+# include <stdbool.h>
 # include "colour.h"
 # include "vec3.h"
 # include "ray.h"
@@ -35,12 +36,6 @@ typedef struct		s_shape
 	bool			(*intersect)(void *shape, t_ray, t_intersect*);
 
 }					t_shape;
-
-typedef t_vector	*t_vshape_set;
-
-t_vshape_set		vshape_set_create(void);
-void				add_shape(t_vshape_set scene, t_shape *shape);
-t_shape				*get_shape(t_vshape_set scene, int index);
 
 typedef struct		s_plane
 {
