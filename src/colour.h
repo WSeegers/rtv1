@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 13:56:30 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 14:20:46 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/05 21:28:14 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ t_colour	colour_scale(t_colour c, double s);
 # define C_GREEN	(COLOUR(0, 1, 0))
 # define C_BLUE		(COLOUR(0, 0, 1))
 # define C_WHITE	(COLOUR(1, 1, 1))
+# define C_AZURE	(COLOUR(0, 0.49, 1))
+# define C_BURGANDY (COLOUR(0.5, 0, 0.125))
 
 #endif

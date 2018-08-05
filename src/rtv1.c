@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/04 23:33:31 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/05 21:29:34 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 {
-	t_plane 	*left_wall; //r
-	t_plane		*back_wall; //g
-	t_plane		*right_wall; //b
+	t_plane 	*left_wall;
+	t_plane		*back_wall;
+	t_plane		*right_wall;
 	t_plane		*pfloor;
 	t_sphere	*s;
 	t_cylinder	*c;
 	t_light		*light;
+	t_cone		*cone;
 
-	left_wall = plane_create(VEC3(-10, 0, 0), VEC3(1, 0, 0), C_RED);
+	left_wall = plane_create(VEC3(-10, 0, 0), VEC3(1, 0, 0), C_BURGANDY);
 	add_shape(shapes, (t_shape*)left_wall);
 
 	right_wall = plane_create(VEC3(10, 0, 0), VEC3(-1, 0, 0), C_GREEN);
@@ -31,48 +32,44 @@ static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 	back_wall = plane_create(VEC3(0, 0, 20), VEC3(0, 0, -1), C_BLUE);
 	add_shape(shapes, (t_shape*)back_wall);
 
-	pfloor = plane_create(VEC3(0, 0, 0), VEC3(0, 1, 0), COLOUR(1.0, 0.5, 0.5));
+	pfloor = plane_create(VEC3(0, -10, 0), VEC3(0, 1, 0), COLOUR(1.0, 0.5, 0.5));
 	add_shape(shapes, (t_shape*)pfloor);
 
-	s = create_sphere(VEC3(0, 3, 0), 3, COLOUR(1.0, 0, 1));
-	add_shape(shapes, (t_shape*)s);
+	// s = create_sphere(VEC3(0, 0, 0), 3, COLOUR(1.0, 0, 1));
+	// add_shape(shapes, (t_shape*)s);
 
-	s = create_sphere(VEC3(0, 7, 0), 2, COLOUR(1.0, 0, 1));
-	add_shape(shapes, (t_shape*)s);
+	// s = create_sphere(VEC3(0, 0, 0), 2, COLOUR(1.0, 0, 1));
+	// add_shape(shapes, (t_shape*)s);
 
-	c = create_cylinder(VEC3(8, 0, 8), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
-	add_shape(shapes, (t_shape*)c);
+	// c = create_cylinder(VEC3(0, 0, 0), VEC3(0, 1, 0), 1, COLOUR(0.4, 0.4, 0.6));
+	// add_shape(shapes, (t_shape*)c);
 
-	c = create_cylinder(VEC3(-8, 0, 8), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
-	add_shape(shapes, (t_shape*)c);
+	// c = create_cylinder(VEC3(0, 0, 0), VEC3(1, 0, 0), 1, COLOUR(0.1, 0.6, 0.9));
+	// add_shape(shapes, (t_shape*)c);
 
-	c = create_cylinder(VEC3(-8, 0, 0), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
-	add_shape(shapes, (t_shape*)c);
+	// c = create_cylinder(VEC3(-8, 0, 0), VEC3(0, 1, 0.5), 1, COLOUR(0.3, 0.6, 0.9));
+	// add_shape(shapes, (t_shape*)c);
 
-	c = create_cylinder(VEC3(8, 0, 0), VEC3(0, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
-	add_shape(shapes, (t_shape*)c);
+	// c = create_cylinder(VEC3(8, 0, 0), VEC3(5, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
+	// add_shape(shapes, (t_shape*)c);
 
-	light = light_create(VEC3(4, 20, 5), colour_scale(C_WHITE, 0.1));
+	cone = create_cone(VEC3(0, 0, 0), VEC3(0.75, 1, 0), 0.5, C_AZURE);
+	add_shape(shapes, (t_shape*)cone);
+
+	// light = light_create(VEC3(4, 20, 5), colour_scale(C_WHITE, 0.1));
+	// add_light(lights, light);
+
+	light = light_create(VEC3(-8, 5, 0), colour_scale(C_WHITE, 0.3));
 	add_light(lights, light);
 
-	light = light_create(VEC3(0, 5, 0), colour_scale(C_WHITE, 0.3));
-	add_light(lights, light);
+	// light = light_create(VEC3(5, 0.1, -3), colour_scale(C_WHITE, 0.2));
+	// add_light(lights, light);
 
-	light = light_create(VEC3(5, 0.1, -3), colour_scale(C_WHITE, 0.2));
-	add_light(lights, light);
-
-	// t_intersect	result;
-	// t_ray test_ray = RAY(VEC3(0, 2, -20), VEC3(0, 0, 1));
-	// printf("hit: %d\n", c->intersect(c, test_ray, &result));
-	// printf("t: %f\n", result.t);
-	// vec3_print("hit_point", ray_calculate(test_ray, result.t));
-	
-	// exit(0);
 }
 
 static	void init_camera(t_camera *cam)
 {
-	camera_set(VEC3(2, 10, -30), VEC3(0, 2, 5), cam);
+	camera_set(VEC3(4, 10, -30), VEC3(0, 0, 0), cam);
 }
 
 static	bool init(void)

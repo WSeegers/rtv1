@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:25:02 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/04 23:03:01 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/05 21:01:56 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct		s_cylinder
 	t_vec3			axis;
 	double			radius;
 	t_mat4			mat;
-	t_mat4			raymat;
+	t_mat4			imat;
 }					t_cylinder;
 
 t_cylinder	*create_cylinder(t_vec3 origin, t_vec3 axis,
@@ -88,5 +88,25 @@ t_cylinder	*create_cylinder(t_vec3 origin, t_vec3 axis,
 bool		cylinder_does_intersect(void *shape, t_ray ray);
 bool		cylinder_intersect(void *shape, t_ray ray, t_intersect *intersect);
 
+
+typedef struct		s_cone
+{
+	t_shape_type	shape_type;
+	t_colour		colour;
+	bool			(*does_intersect)(void *shape, t_ray);
+	bool			(*intersect)(void *shape, t_ray, t_intersect*);
+
+	t_vec3			origin;
+	t_vec3			axis;
+	double			radius;
+	t_mat4			mat;
+	t_mat4			imat;
+}					t_cone;
+
+t_cone	*create_cone(t_vec3 p1, t_vec3 axis, double unit_radius,
+				t_colour colour);
+bool	cone_intersect(void *shape, t_ray ray,
+					t_intersect *intersect);
+bool	cone_does_intersect(void *shape, t_ray ray);
 
 #endif

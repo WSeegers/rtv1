@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:56:25 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 20:05:56 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/05 22:20:03 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_colour	eval_light(t_intersect s_intersect, t_vshape_set shapes, t_vlight_set l
 			temp = colour_scale(light.colour, -vec3_dot(dir, s_intersect.normal));
 			temp = colour_multiply(s_intersect.shape->colour, temp);
 			ret = colour_add(ret, temp);
+
 		}
 	}
 	

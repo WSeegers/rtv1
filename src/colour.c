@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 13:58:56 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 18:42:29 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/05 21:25:12 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_icolour	colour_to_int(t_colour col)
 	red = col.r * 255;
 	green = col.g * 255;
 	blue = col.b * 255;
-	icol = 0 | red | (green << 8) | (blue << 16);
+	icol = 0 | blue | (green << 8) | (red << 16);
 	return (icol);
 }
 
