@@ -1,5 +1,0 @@
-init scene
-generating shape
-casting
-done casting
-blit

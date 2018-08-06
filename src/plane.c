@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 14:03:22 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 19:18:50 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/06 18:10:20 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_plane	*plane_create(t_vec3 point, t_vec3 normal, t_colour colour)
 	plane->n = vec3_normalize(normal);
 	plane->colour = colour;
 	plane->intersect = plane_intersect;
-	plane->does_intersect = plane_does_intersect;
 	return (plane);
 }
 

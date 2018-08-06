@@ -24,7 +24,7 @@ then
 		mkdir SDL2-2.0.8/build
 		cd SDL2-2.0.8/build
 		CC=../build-scripts/gcc-fat.sh ../configure
-		make
+		make -j4
 		echo 'SDL2 built'
 	fi
 

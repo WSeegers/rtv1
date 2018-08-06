@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 20:44:50 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/05 20:45:44 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/06 21:02:18 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_cylinder	*create_cylinder(t_vec3 p1, t_vec3 axis, double radius,
 	cylinder->axis = vec3_normalize(axis);
 	cylinder->radius = radius;
 	cylinder->colour = colour;
-	cylinder->does_intersect = cylinder_does_intersect;
 	cylinder->intersect = cylinder_intersect;
 	angle = acos(vec3_dot(VEC3(0,1,0), axis) / vec3_length(axis));
 	cylinder->imat = mat4_rotate(mat, -angle, vec3_cross(axis, VEC3(0, 1, 0)));
@@ -57,49 +56,13 @@ bool			cylinder_intersect(void *shape, t_ray ray,
 		return (false);
 	t = (-b - sqrt(des)) / (2.0 * a);
 	if (t > RAY_T_MIN && t < ray.t_max)
-		intersect->t = t;
+		intersect->t = fabs(t);
 	else
 		return (false);
+	// vec3_print("rat->t", ray_calculate(ray, t));
 	ray.p = ray_calculate(ray, t);
-	intersect->normal = vec3_transform(VEC3(ray.p.x, 0, ray.p.z), cyl->mat);
-	return (true);
-}
-
-
-bool			cylinder_intersect_v1(void *shape, t_ray ray,
-					t_intersect *intersect)
-{
-	t_cylinder	*cyl;
-	
-	intersect->ray = ray;
-	intersect->shape = shape;
-	cyl = (t_cylinder*)shape;
-
-	ray.p = vec3_subtract(ray.p, cyl->origin);
-	t_vec3	vCrossNormal = vec3_cross(ray.d, cyl->axis);
-	double	mag = vec3_length(vCrossNormal);
-	vCrossNormal = vec3_normalize(vCrossNormal);
-	double	d = fabs(vec3_dot(ray.p, vCrossNormal));
-
-	if (d < cyl->radius)
-	{
-		t_vec3 vU = vec3_cross(ray.p, cyl->axis);
-      	double t = -(vec3_dot(vU, vCrossNormal) / mag);
-
-		t_vec3 vO = vec3_normalize(vec3_cross(vCrossNormal, cyl->axis));
-    	double s = fabs(sqrt(cyl->radius * cyl->radius - d * d) /
-                          vec3_dot(ray.d, vO));
-		intersect->t = t - s;
-		if (intersect->t < 0)
-			return (false);
-		intersect->normal = vCrossNormal;
-	}
-	else
-		return (false);
-	return (true);
-}
-
-bool		cylinder_does_intersect(void *shape, t_ray ray)
-{
+	ray.p = vec3_normalize(VEC3(ray.p.x, 0.0, ray.p.z));
+	intersect->normal = vec3_transform(ray.p, cyl->mat);
+	// vec3_print("norm", intersect->normal);
 	return (true);
 }

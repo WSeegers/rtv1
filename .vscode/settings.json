@@ -2,6 +2,7 @@
 	"files.associations": {
 		"rtv1.h": "c",
 		"cmath": "c",
-		"shape.h": "c"
+		"shape.h": "c",
+		"colour.h": "c"
 	}
 }

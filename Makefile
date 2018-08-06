@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+         #
+#    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/08/04 21:13:31 by wseegers         ###   ########.fr        #
+#    Updated: 2018/08/06 18:07:39 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ all : make_LIB $(NAME)
 
 make_LIB :
 	./SDL_install.sh
-	make -C libwtcc
+	make -C libwtcc -j4
 
 $(NAME) : $(BIN)
 	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIB) $(SDL2) libmatrix/*.c

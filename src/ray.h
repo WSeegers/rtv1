@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:21:15 by wseegers          #+#    #+#             */
-/*   Updated: 2018/07/31 18:16:40 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/06 18:28:04 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	RAY_H
+#ifndef RAY_H
 # define RAY_H
 
 # define DOT_MIN	(1e-6)
@@ -18,6 +18,8 @@
 # define RAY_T_MAX	(1.0e30)
 
 # include "vec3.h"
+# include "scene.h"
+# include "s_vector.h"
 
 typedef	struct	s_ray
 {
@@ -28,6 +30,12 @@ typedef	struct	s_ray
 
 # define RAY(p, d)	((t_ray){p, d, RAY_T_MAX})
 
-t_vec3	ray_calculate(t_ray ray, double t);
+typedef t_vector			*t_vshape_set;
+typedef t_vector			*t_vlight_set;
+typedef struct s_intersect	t_intersect;
+
+t_vec3				ray_calculate(t_ray ray, double t);
+bool				cast_ray(t_ray ray, t_vshape_set shapes,
+												t_intersect *intercect);
 
 #endif

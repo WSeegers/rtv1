@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/05 20:45:55 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/05 21:11:50 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/06 19:09:33 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_cone	*create_cone(t_vec3 p1, t_vec3 axis, double unit_radius,
 	cone->axis = vec3_normalize(axis);
 	cone->radius = unit_radius;
 	cone->colour = colour;
-	cone->does_intersect = cone_does_intersect;
 	cone->intersect = cone_intersect;
 	angle = acos(vec3_dot(VEC3(0,1,0), axis) / vec3_length(axis));
 	cone->imat = mat4_rotate(mat, -angle, vec3_cross(axis, VEC3(0, 1, 0)));
@@ -60,12 +59,7 @@ bool	cone_intersect(void *shape, t_ray ray,
 		intersect->t = t;
 	else
 		return (false);
-	ray.p = ray_calculate(ray, t);
-	intersect->normal = vec3_transform(VEC3(ray.p.x, 1 / cone->radius, ray.p.z), cone->mat);
-	return (true);
-}
-
-bool	cone_does_intersect(void *shape, t_ray ray)
-{
+	ray.p = vec3_normalize(ray_calculate(ray, t));
+	intersect->normal = vec3_transform(VEC3(ray.p.x, (ray.p.y < 0) ? cone->radius : -cone->radius, ray.p.z), cone->mat);
 	return (true);
 }

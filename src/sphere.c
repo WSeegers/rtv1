@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/04 10:38:47 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/04 10:38:50 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/06 18:11:35 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_sphere	*create_sphere(t_vec3 center, double radius, t_colour colour)
 	sphere->center = center;
 	sphere->radius = radius;
 	sphere->colour = colour;
-	sphere->does_intersect = sphere_does_intersect;
 	sphere->intersect = sphere_intersect;
 	return(sphere);
 }

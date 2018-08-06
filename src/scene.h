@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/04 10:11:56 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/04 10:32:57 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/06 18:21:23 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
+# include "rtv1.h"
 # include "shape.h"
 # include "s_vector.h"
 # include "light.h"
@@ -32,6 +33,6 @@ t_shape			*get_shape(t_vshape_set scene, int index);
 
 t_vlight_set	vlight_set_create(void);
 void			add_light(t_vlight_set scene, t_light *light);
-t_light 		*get_light(t_vlight_set scene, int index);
+t_light			*get_light(t_vlight_set scene, int index);
 
 #endif

@@ -3,56 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   generate_screen.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wseegers <wseegers.mauws@gmail.com>        +#+  +:+       +#+        */
+/*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:56:25 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/05 22:20:03 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/06 22:42:18 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "f_math.h"
 
-bool	cast_ray(t_ray ray, t_vshape_set shapes, t_intersect *intercect)
+t_colour	get_specular(t_intersect s_intersect, t_intersect l_intersect, t_light light)
 {
-	int i;
-	t_shape *shape;
-	t_intersect temp;
-	t_colour col;
+	t_vec3		half_dir;
+	double		angle;
+	t_colour	ret;
 
-	i = -1;
-	col = C_BLACK;
-	while (++i < shapes->total)
-	{
-		shape = get_shape(shapes, i);
-		if (shape->intersect(shape, ray, &temp))
-		{
-			if (temp.t < ray.t_max)
-			{
-				intercect->shape = shape;
-				ray.t_max = temp.t;
-				*intercect = temp;
-			}
-		}
-	}
-	return (ray.t_max != RAY_T_MAX);
+	half_dir = vec3_normalize(vec3_subtract(vec3_negate(s_intersect.ray.d), l_intersect.ray.d));
+	angle = MAX(vec3_dot(half_dir, s_intersect.normal), 0.0);
+	ret = colour_scale(C_WHITE, pow(angle, 64 * 8));
+	return (ret);
 }
 
-void	set_ray(int x, int y, t_ray *ray, t_camera cam)
+t_colour	get_diffuse(t_intersect s_intersect, t_intersect l_intersect, t_light light)
 {
-	double	rx;
-	double	ry;
-	t_vec3	fwd;
-	t_vec3	right;
-	t_vec3	up;
+	double		angle;
+	t_colour	ret;
 
-	fwd = cam.forward;
-	rx = (-1.0 + (((double)x / SCREEN_WIDTH) * 2.0)) * FOV;
-	ry = -(-1.0 + (((double)y / SCREEN_HEIGHT) * 2.0)) * ASPECT_RATIO * FOV;
-	ray->t_max = RAY_T_MAX;
-	right = vec3_scale(rx, cam.right);
-	up = vec3_scale(ry, cam.up);
-	ray->d = vec3_normalize(vec3_add(vec3_add(fwd, up), right));
+	angle = MAX(-vec3_dot(l_intersect.ray.d, s_intersect.normal), 0);
+	ret = colour_scale(light.colour, angle);
+	ret = colour_multiply(s_intersect.shape->colour, ret);
+	return (ret);
 }
 
 t_colour	eval_light(t_intersect s_intersect, t_vshape_set shapes, t_vlight_set lights)
@@ -76,15 +57,39 @@ t_colour	eval_light(t_intersect s_intersect, t_vshape_set shapes, t_vlight_set l
 		cast_ray(RAY(light.origin, dir), shapes, &l_intersect);
 		if(l_intersect.shape == s_intersect.shape)
 		{
-			temp = colour_scale(light.colour, -vec3_dot(dir, s_intersect.normal));
-			temp = colour_multiply(s_intersect.shape->colour, temp);
-			ret = colour_add(ret, temp);
-
+			ret = colour_add(ret, get_diffuse(s_intersect, l_intersect, light));
+			ret = colour_add(ret, get_specular(s_intersect, l_intersect, light));
+			// if (-vec3_dot(dir, s_intersect.normal) > 0)
+			// {
+			// 	double dot = vec3_dot(vec3_reflect(l_intersect.ray.d, l_intersect.normal), vec3_negate(s_intersect.ray.d));
+			// 	dot = pow(dot, 16);
+			// 	if (dot > 0)
+			// 	{
+			// 		temp = colour_scale(light.colour, dot);
+			// 		ret = colour_add(ret, temp);
+			// 	}
+			// }
 		}
 	}
 	
 
 	return (ret);
+}
+
+static void	set_ray(int x, int y, t_ray *ray, t_camera cam)
+{
+	double	rx;
+	double	ry;
+	t_vec3	fwd;
+	t_vec3	right;
+	t_vec3	up;
+
+	fwd = cam.forward;
+	rx = (-1.0 + (((double)x / SCREEN_WIDTH) * 2.0)) * FOV;
+	ry = -(-1.0 + (((double)y / SCREEN_HEIGHT) * 2.0)) * ASPECT_RATIO * FOV;
+	right = vec3_scale(rx, cam.right);
+	up = vec3_scale(ry, cam.up);
+	ray->d = vec3_normalize(vec3_add(vec3_add(fwd, up), right));
 }
 
 void	generate_screen(t_camera cam, t_vshape_set shapes, t_vlight_set lights)
