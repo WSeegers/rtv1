@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 01:40:44 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/06 18:14:18 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/07 11:54:45 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ bool	cast_ray(t_ray ray, t_vshape_set shapes, t_intersect *intercect)
 	int			i;
 	t_shape		*shape;
 	t_intersect	temp;
-	t_colour	col;
 
 	i = -1;
-	col = C_BLACK;
 	ray.t_max = RAY_T_MAX;
 	while (++i < shapes->total)
 	{

@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 14:03:22 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/06 18:10:20 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/07 11:53:40 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@ t_plane	*plane_create(t_vec3 point, t_vec3 normal, t_colour colour)
 	plane->colour = colour;
 	plane->intersect = plane_intersect;
 	return (plane);
-}
-
-bool		plane_does_intersect(void *shape, t_ray ray)
-{
-	double	dot;
-	t_plane	*plane;
-	double	t;
-
-	plane = (t_plane*)shape;
-	dot = vec3_dot(ray.d, plane->n);
-	if (fabs(dot) < DOT_MIN)
-		return (false);
-	t = vec3_dot(vec3_subtract(plane->p, ray.p), plane->n) / dot;
-	if (t <= RAY_T_MIN || t >= ray.t_max)
-		return (false);
-	return (true);
 }
 
 bool	plane_intersect(void *shape, t_ray ray, t_intersect *intersect)

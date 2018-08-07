@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/06 22:43:05 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/07 09:14:04 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 	t_light		*light;
 	t_cone		*cone;
 
-	// left_wall = plane_create(VEC3(-10, 0, 0), VEC3(1, 0, 0), C_BURGANDY);
-	// add_shape(shapes, (t_shape*)left_wall);
+	left_wall = plane_create(VEC3(-40, 0, 0), VEC3(1, 0, 0), C_BURGANDY);
+	add_shape(shapes, (t_shape*)left_wall);
 
-	// right_wall = plane_create(VEC3(10, 0, 0), VEC3(-1, 0, 0), C_GREEN);
-	// add_shape(shapes, (t_shape*)right_wall);
+	right_wall = plane_create(VEC3(40, 0, 0), VEC3(-1, 0, 0), C_GREEN);
+	add_shape(shapes, (t_shape*)right_wall);
 
-	back_wall = plane_create(VEC3(0, 0, 40), VEC3(0, 0, -1), C_BLUE);
+	back_wall = plane_create(VEC3(0, 0, 80), VEC3(0, 0, -1), C_BLUE);
 	add_shape(shapes, (t_shape*)back_wall);
 
 	pfloor = plane_create(VEC3(0, 0, -10), VEC3(0, 1, 0), COLOUR(1.0, 0.5, 0.5));
@@ -40,27 +40,29 @@ static void	init_scene(t_vshape_set shapes, t_vlight_set lights)
 		s = create_sphere(VEC3(i * 2, i + 10, i), fabs(i * 0.342 + 2), COLOUR(fmod(fabs(i / 2.3), 1), fmod(fabs(i / 4.3), 1), fmod(fabs(i / 2.0), 1)));
 		add_shape(shapes, (t_shape*)s);
 	}
+	s = create_sphere(VEC3(-20, 0, 0), 5, COLOUR(1.0, 0, 1));
+	add_shape(shapes, (t_shape*)s);
 
-	// s = create_sphere(VEC3(0, 0, 0), 2, COLOUR(1.0, 0, 1));
-	// add_shape(shapes, (t_shape*)s);
+	s = create_sphere(VEC3(20, 0, 0), 5, COLOUR(1.0, 0, 1));
+	add_shape(shapes, (t_shape*)s);
 
-	// s = create_sphere(VEC3(3, 3, -1), 2, COLOUR(1.0, 0, 1));
-	// add_shape(shapes, (t_shape*)s);
+	s = create_sphere(VEC3(-20, 0, 40), 5, COLOUR(1.0, 0, 1));
+	add_shape(shapes, (t_shape*)s);
 
-	// s = create_sphere(VEC3(1, 6, 4), 1, COLOUR(1.0, 0, 1));
-	// add_shape(shapes, (t_shape*)s);
+	s = create_sphere(VEC3(20, 0, 40), 5, COLOUR(1.0, 0, 1));
+	add_shape(shapes, (t_shape*)s);
 
-	// c = create_cylinder(VEC3(0, 10, 0), VEC3(0, 1, 0), 1, COLOUR(0.4, 0.4, 0.6));
-	// add_shape(shapes, (t_shape*)c);
+	c = create_cylinder(VEC3(-20, 0, 0), VEC3(0, 1, 0), 2, COLOUR(0.3, 0.6, 0.9));
+	add_shape(shapes, (t_shape*)c);
 
-	// c = create_cylinder(VEC3(0, 0, 0), VEC3(1, 0, 0), 1, COLOUR(0.1, 0.6, 0.9));
-	// add_shape(shapes, (t_shape*)c);
+	c = create_cylinder(VEC3(20, 0, 0), VEC3(0, 1, 0), 2, COLOUR(0.3, 0.6, 0.9));
+	add_shape(shapes, (t_shape*)c);
 
-	// c = create_cylinder(VEC3(0, 10, -5), VEC3(1, 1, 1), 1, COLOUR(0.3, 0.6, 0.9));
-	// add_shape(shapes, (t_shape*)c);
+	c = create_cylinder(VEC3(20, 0, 40), VEC3(0, 1, 0), 2, COLOUR(0.3, 0.6, 0.9));
+	add_shape(shapes, (t_shape*)c);
 
-	// c = create_cylinder(VEC3(4, 0, 0), VEC3(-1, 1, 0), 1, COLOUR(0.3, 0.6, 0.9));
-	// add_shape(shapes, (t_shape*)c);
+	c = create_cylinder(VEC3(-20, 0, 40), VEC3(0, 1, 0), 2, COLOUR(0.3, 0.6, 0.9));
+	add_shape(shapes, (t_shape*)c);
 
 	// cone = create_cone(VEC3(0, 0, 0), VEC3(0, 1, 0), 0.25, C_GREEN);
 	// add_shape(shapes, (t_shape*)cone);
