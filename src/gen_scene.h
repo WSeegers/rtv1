@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vshape_set.c                                       :+:      :+:    :+:   */
+/*   gen_scene.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/04 10:28:27 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 17:12:52 by wseegers         ###   ########.fr       */
+/*   Created: 2018/08/08 14:08:09 by wseegers          #+#    #+#             */
+/*   Updated: 2018/08/08 15:43:21 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#ifndef GEN_SCENE_H
+# define GEN_SCENE_H
 
-t_vshape_set	vshape_set_create(void)
-{
-	return (vector_create());
-}
+# include "rtv1.h"
 
-void			add_shape(t_vshape_set scene, t_shape *shape)
-{
-	vector_add(scene, shape);
-}
+void	gen_scene1(t_scene *scene);
+void	gen_scene2(t_scene *scene);
+void	gen_scene3(t_scene *scene);
+void	gen_scene4(t_scene *scene);
 
-t_shape			*get_shape(t_vshape_set scene, int index)
-{
-	return ((t_shape*)vector_get(scene, index));
-}
+#endif

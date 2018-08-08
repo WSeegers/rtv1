@@ -6,14 +6,13 @@
 #    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/08/06 18:07:39 by wseegers         ###   ########.fr        #
+#    Updated: 2018/08/08 17:15:06 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = rtv1
 CC = clang
-#CFLAGS = -Werror -Wall -Wextra
-CFLAGS =
+CFLAGS = -Werror -Wall -Wextra
 SDL2 = `sdl2-config --cflags --libs`
 INC = -I libwtcc/include -I libmatrix -I include
 LIB = -L ./libwtcc -lwtcc

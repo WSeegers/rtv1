@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vshape_set.c                                       :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/04 10:28:27 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 17:12:52 by wseegers         ###   ########.fr       */
+/*   Created: 2018/08/08 13:38:55 by wseegers          #+#    #+#             */
+/*   Updated: 2018/08/08 17:09:02 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#ifndef CAMERA_H
+# define CAMERA_H
 
-t_vshape_set	vshape_set_create(void)
-{
-	return (vector_create());
-}
+# include "vec3.h"
 
-void			add_shape(t_vshape_set scene, t_shape *shape)
+typedef	struct	s_camera
 {
-	vector_add(scene, shape);
-}
+	t_vec3	origin;
+	t_vec3	forward;
+	t_vec3	right;
+	t_vec3	up;
+	double	height;
+	double	width;
+}				t_camera;
 
-t_shape			*get_shape(t_vshape_set scene, int index)
-{
-	return ((t_shape*)vector_get(scene, index));
-}
+void			camera_set(t_vec3 origin, t_vec3 target, t_camera *cam);
+void			camera_set_target(t_vec3 target, t_camera *cam);
+
+#endif
