@@ -6,7 +6,7 @@
 #    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/08/08 17:15:06 by wseegers         ###   ########.fr        #
+#    Updated: 2018/08/08 19:55:18 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,15 @@ NAME = rtv1
 CC = clang
 CFLAGS = -Werror -Wall -Wextra
 SDL2 = `sdl2-config --cflags --libs`
-INC = -I libwtcc/include -I libmatrix -I include
-LIB = -L ./libwtcc -lwtcc
+INC = -I libwtcc/include -I libmatrix/include -I include
+LIB = -L ./libwtcc -lwtcc -L ./libmatrix -lmatrix
+LIBS = libmatrix/libmatrix.a libwtcc/libwtcc.a
 
 SRC_PATH = src
-ALL_SRC = $(wildcard src/*.c)
+ALL_SRC = camera.c colour.c cone.c cylinder.c eval_light.c\
+		  gen_scene1.c gen_scene2.c gen_scene3.c gen_scene4.c\
+		  generate_screen.c light.c plane.c putpixel.c ray.c\
+		  rtv1.c sphere.c vlight_set.c vshape_set.c
 SRC = $(ALL_SRC:src/%=%)
 BIN_PATH = bin
 BIN := $(SRC:%.c=$(BIN_PATH)/%.o)
@@ -32,15 +36,20 @@ else
 	LIB += -lm
 endif
 
-all : make_LIB $(NAME)
+all : install_sdl $(NAME)
 	@echo "wseegers" > author
+	
+$(NAME) : $(LIBS) $(BIN)
+	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIB) $(SDL2) 
 
-make_LIB :
+install_sdl :
 	./SDL_install.sh
-	make -C libwtcc -j4
 
-$(NAME) : $(BIN)
-	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIB) $(SDL2) libmatrix/*.c
+libmatrix/libmatrix.a : 
+	make -C libmatrix -j4
+
+libwtcc/libwtcc.a :
+	make -C libwtcc -j4
 
 $(BIN_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(BIN_PATH)
@@ -56,10 +65,15 @@ fclean : clean
 	rm -rf SDL2-2.0.8
 	rm -rf include/SDL2
 	make fclean -C libwtcc
+	make fclean -C libmatrix
 
 re : fclean all
 
 run : all
 	@./$(NAME)
 
-.PHONEY : usage all make_all  clean  fclean  re
+debug :
+	@echo $(BIN)
+	@echo $(SRC)
+
+.PHONEY : usage all make_all clean fclean re install_sdl

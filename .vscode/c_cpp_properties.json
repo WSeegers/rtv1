@@ -4,8 +4,9 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/libwtcc/include",
-                "${workspaceFolder}/libmatrix"
+                "${workspaceFolder}/libwtcc/include/**",
+                "${workspaceFolder}/libmatrix/include/**",
+				"${workspaceFolder}/libmatrix/*/*"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",

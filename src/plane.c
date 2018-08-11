@@ -6,11 +6,10 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 14:03:22 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 13:07:30 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/08 19:35:54 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
 #include "rtv1.h"
 #include "f_memory.h"
 

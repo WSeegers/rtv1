@@ -6,12 +6,11 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 15:26:00 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/07 09:00:00 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/08 19:35:45 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "vec3.h"
 
 void	camera_set(t_vec3 origin, t_vec3 target, t_camera *cam)
 {

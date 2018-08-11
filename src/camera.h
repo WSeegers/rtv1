@@ -6,14 +6,14 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 13:38:55 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 17:09:02 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/08 19:35:36 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
 # define CAMERA_H
 
-# include "vec3.h"
+# include "libmat.h"
 
 typedef	struct	s_camera
 {

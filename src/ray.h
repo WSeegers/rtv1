@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:21:15 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 13:27:48 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/08 19:34:18 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define RAY_T_MIN	(1e-6)
 # define RAY_T_MAX	(1.0e30)
 
-# include "vec3.h"
+# include "libmat.h"
 # include "scene.h"
 # include "s_vector.h"
 

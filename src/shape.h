@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:25:02 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 17:14:35 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/08 19:34:32 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdbool.h>
 # include "rtv1.h"
 # include "colour.h"
-# include "vec3.h"
+# include "libmat.h"
 # include "ray.h"
 # include "s_vector.h"
 

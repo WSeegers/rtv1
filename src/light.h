@@ -6,14 +6,14 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/04 10:16:58 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 17:08:46 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/08 19:35:24 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIGHT_H
 # define LIGHT_H
 
-# include "vec3.h"
+# include "libmat.h"
 # include "colour.h"
 # include "s_vector.h"
 
