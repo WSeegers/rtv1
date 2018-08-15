@@ -6,13 +6,14 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 15:33:10 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 17:21:51 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/15 09:46:42 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gen_scene.h"
 #include "colour.h"
 #include <stdlib.h>
+#include <time.h>
 
 static t_vec3	vec3_rand(double min, double max)
 {
@@ -66,6 +67,7 @@ static void		add_lights(t_vlight_set lights)
 
 void			gen_scene4(t_scene *scene)
 {
+	srand(time(NULL));
 	camera_set(VEC3(15, 20, -50), VEC3(0, 10, 0), &scene->camera);
 	add_lights(scene->lights);
 	add_shapes(scene->shapes);
