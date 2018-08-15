@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:58 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/15 09:33:39 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/15 16:20:28 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <math.h>
 # include "libmat.h"
 # include "f_print.h"
+# include "f_memory.h"
 # include "ray.h"
 # include "s_vector.h"
 # include "shape.h"
@@ -26,6 +27,7 @@
 # include "scene.h"
 # include "colour.h"
 # include "camera.h"
+# include "parse_scene.h"
 
 # define SCREEN_TITLE	"rtv1 - WSeegers"
 # define SCREEN_WIDTH	(640 * 2)

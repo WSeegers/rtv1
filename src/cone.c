@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/05 20:45:55 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 17:10:55 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/15 16:46:22 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ bool		cone_intersect(void *shape, t_ray ray,
 		return (false);
 	ray.p = vec3_normalize(ray_calculate(ray, t));
 	intersect->normal = vec3_normalize(VEC3(ray.p.x, 0, ray.p.z));
-	intersect->normal = VEC3(ray.p.x / cone->radius,
+	intersect->normal = vec3_normalize(VEC3(ray.p.x / cone->radius,
 		(ray.p.y <= 0) ? cone->radius : -cone->radius,
-		ray.p.z / cone->radius);
+		ray.p.z / cone->radius));
 	return (true);
 }

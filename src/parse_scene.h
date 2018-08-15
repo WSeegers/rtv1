@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.h                                           :+:      :+:    :+:   */
+/*   parse_scene.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/08 13:38:55 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/15 13:50:51 by wseegers         ###   ########.fr       */
+/*   Created: 2018/08/15 12:16:11 by wseegers          #+#    #+#             */
+/*   Updated: 2018/08/15 15:53:33 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAMERA_H
-# define CAMERA_H
+#ifndef PARSE_SCENE_H
+# define PARSE_SCENE_H
 
-# include "libmat.h"
+# include "scene.h"
+# include "f_string.h"
+# include "f_cntl.h"
 
-typedef	struct	s_camera
-{
-	t_vec3	origin;
-	t_vec3	forward;
-	t_vec3	right;
-	t_vec3	up;
-	double	height;
-	double	width;
-}				t_camera;
+# define P_PLANE	"P"
+# define P_SPHERE	"S"
+# define P_CYLINDER	"Cy"
+# define P_CONE		"Co"
 
-t_camera		*camera_create(void);
-void			camera_set(t_vec3 origin, t_vec3 target, t_camera *cam);
-void			camera_set_target(t_vec3 target, t_camera *cam);
+typedef struct s_scene	t_scene;
+
+void					parse_scene(t_scene *scene);
+t_shape					*parse_shape(char *s_shape);
 
 #endif

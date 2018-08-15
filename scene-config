@@ -1,0 +1,68 @@
+## 
+##	Config file for configuring a scene
+##
+##	Vector:
+##		A vector is described as (x, y, z). Any argument that is
+##		surrounded by brackets requires a vector 
+##		
+##		eg. (1,4,5)
+##
+##	Colour:
+##		Colour can be described by RGB ratios
+##
+##		eg. (1.0,1.0,1.0) is white
+##		eg. (1.0,0.0,0.0) is red
+##
+##
+##
+##	Scene Objects:
+##		Scene Objects can be described as:	c -> Camera
+##											s -> Shape
+##											l -> Point light
+##											a -> Ambient light
+##
+## 	Camera:
+##		The config require a single camera to be configured
+##
+##		c|(Position)|(LookAt)
+##
+##	Shape:
+##
+##		s|Shape|(Base Position)|(Axis)|Colour|Unit Radius
+##		
+##		
+##
+##		|Shape| Keys:	P  -> Plane (Axis describes the normal, Unit Radius is ignored)
+##						S  -> Sphere (Axis is ignored)
+##						Cy -> Cylinder	
+##						Co -> Cone (Unit Radius is the radius at 1 unit along the height)
+##
+##		nb.	Cones and Cylinder are not capped. take this into consideration, especially
+##			when generating cones that might engulf camera or lights
+##
+##	Ambient Light:
+##		Ambient light is light the will act as a base for any pixel rendered		
+##
+##		a|Colour|Intensity
+##
+##		Intensity is a single number (0.0 - 1.0) that describes
+##		the intensity of the light
+##
+##	Point Lights:
+##		Point Lights radiate outwards equally
+##	
+##		l|(Position)|Colour|intensity
+##
+##	Comments:
+##		if you have not noticed any comments are to be lead with atlease a "##"
+##
+##
+
+c|(0,0,-30)|(0,0,0)
+s|P|(0,0,20)|(0,0,-1)|(1,0,0)| 
+s|S|(10,0,0)|(0,0,1)|(1,1,1)|2.5
+s|S|(0,0,0)|(0,0,1)|(1,0,1)|2.5
+l|(0,20,-40)|(1,1,1)|(0.5)
+l|(24,20,0)|(1,1,1)|(0.5)
+##s|Co|(0,0,0)|(0,0,0)|0,0,1|1
+## End

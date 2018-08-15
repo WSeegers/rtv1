@@ -6,7 +6,7 @@
 #    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/08/08 19:55:18 by wseegers         ###   ########.fr        #
+#    Updated: 2018/08/15 15:55:29 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC_PATH = src
 ALL_SRC = camera.c colour.c cone.c cylinder.c eval_light.c\
 		  gen_scene1.c gen_scene2.c gen_scene3.c gen_scene4.c\
 		  generate_screen.c light.c plane.c putpixel.c ray.c\
-		  rtv1.c sphere.c vlight_set.c vshape_set.c
+		  rtv1.c sphere.c vlight_set.c vshape_set.c parse_scene.c\
+		  scene.c
 SRC = $(ALL_SRC:src/%=%)
 BIN_PATH = bin
 BIN := $(SRC:%.c=$(BIN_PATH)/%.o)

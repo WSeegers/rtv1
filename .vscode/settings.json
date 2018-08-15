@@ -13,6 +13,7 @@
 		"mat4.h": "c",
 		"mat3.h": "c",
 		"quat.h": "c",
-		"libmat.h": "c"
+		"libmat.h": "c",
+		"stdlib.h": "c"
 	}
 }

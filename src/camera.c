@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 15:26:00 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 19:35:45 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/15 15:44:01 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,9 @@ void	camera_set_target(t_vec3 target, t_camera *cam)
 	cam->forward = vec3_normalize(vec3_subtract(target, cam->origin));
 	cam->right = vec3_normalize(vec3_cross(cam->forward, UP_GUIDE));
 	cam->up = vec3_normalize(vec3_cross(cam->forward, cam->right));
+}
+
+t_camera	*camera_create(void)
+{
+	return (f_memalloc(sizeof(t_camera)));
 }

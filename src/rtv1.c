@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/15 09:47:49 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/15 16:48:19 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,35 +58,15 @@ static void	loop(void)
 		}
 }
 
-static void	select_scene(char selection, t_scene *scene)
-{
-	if (selection == '1')
-		gen_scene1(scene);
-	else if (selection == '2')
-		gen_scene2(scene);
-	else if (selection == '3')
-		gen_scene3(scene);
-	else
-		gen_scene4(scene);
-}
-
-int			main(int ac, char *av[])
+int			main(void)
 {
 	t_scene	scene;
-	char	*selection;
 
-	if (ac != 2 || f_strlen((selection = av[1])) != 1 ||
-		!f_strchr("1234", selection[0]))
-	{
-		f_printf("%s: usage: ./rtv1 [1-4]\n", av[0]);
-		exit(0);
-	}
 	if (!init())
 		SDL_Quit();
-	scene.shapes = vshape_set_create();
-	scene.lights = vlight_set_create();
+	scene_init(&scene);
 	f_printf("Init scene\n");
-	select_scene(av[1][0], &scene);
+	parse_scene(&scene);
 	f_printf("Generating view, please wait...\n");
 	generate_screen(scene.camera, scene.shapes, scene.lights);
 	f_printf("Blit\n");
