@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/15 09:41:01 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/15 09:47:49 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ static void	select_scene(char selection, t_scene *scene)
 int			main(int ac, char *av[])
 {
 	t_scene	scene;
-	char	*selection;		
+	char	*selection;
 
-	if (ac != 2 || f_strlen((selection = av[1])) != 1 || !f_strchr("1234", selection[0]))
+	if (ac != 2 || f_strlen((selection = av[1])) != 1 ||
+		!f_strchr("1234", selection[0]))
 	{
 		f_printf("%s: usage: ./rtv1 [1-4]\n", av[0]);
 		exit(0);
@@ -86,7 +87,6 @@ int			main(int ac, char *av[])
 	scene.lights = vlight_set_create();
 	f_printf("Init scene\n");
 	select_scene(av[1][0], &scene);
-	//gen_scene4(&scene);
 	f_printf("Generating view, please wait...\n");
 	generate_screen(scene.camera, scene.shapes, scene.lights);
 	f_printf("Blit\n");
