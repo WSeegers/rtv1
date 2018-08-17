@@ -6,7 +6,7 @@
 #    By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/28 22:24:10 by wseegers          #+#    #+#              #
-#    Updated: 2018/08/15 15:55:29 by wseegers         ###   ########.fr        #
+#    Updated: 2018/08/17 11:47:17 by wseegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ LIBS = libmatrix/libmatrix.a libwtcc/libwtcc.a
 
 SRC_PATH = src
 ALL_SRC = camera.c colour.c cone.c cylinder.c eval_light.c\
-		  gen_scene1.c gen_scene2.c gen_scene3.c gen_scene4.c\
 		  generate_screen.c light.c plane.c putpixel.c ray.c\
 		  rtv1.c sphere.c vlight_set.c vshape_set.c parse_scene.c\
 		  scene.c
@@ -44,7 +43,7 @@ $(NAME) : $(LIBS) $(BIN)
 	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIB) $(SDL2) 
 
 install_sdl :
-	./SDL_install.sh
+	@./SDL_install.sh
 
 libmatrix/libmatrix.a : 
 	make -C libmatrix -j4
@@ -56,7 +55,7 @@ $(BIN_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(BIN_PATH)
 	$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@
 
--include $(DEP)
+#-include $(DEP)
 
 clean :
 	rm -rf $(BIN_PATH)

@@ -18,14 +18,14 @@ then
 
 	if [ -d SDL2-2.0.8/build ]
 	then
-		echo 'SDL2 built'
+		echo 'SDL built'
 	else
-		echo 'Building SDL2'
+		echo 'Building SDL'
 		mkdir SDL2-2.0.8/build
 		cd SDL2-2.0.8/build
 		CC=../build-scripts/gcc-fat.sh ../configure
 		make -j4
-		echo 'SDL2 built'
+		echo 'SDL built'
 	fi
 
 	cd $ROOTL

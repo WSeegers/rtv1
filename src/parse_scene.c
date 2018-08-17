@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 12:12:39 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/15 16:30:29 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/17 12:06:46 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	parse_camera(t_camera *cam, char *s_camera)
 	pos = parse_vector(split[1]);
 	look_at = parse_vector(split[2]);
 	camera_set(pos, look_at, cam);
+	f_strarrdel(split);
 }
 
 t_shape		*parse_shape(char *s_shape)
@@ -135,29 +136,21 @@ void		parse_scene(t_scene *scene)
 	fconfig = f_openf("./scene-config", 'r');
 	while (f_next_line(&line, fconfig))
 	{
-		if (line[1] == '|')
-		{
-			if (line[0] == 'c')
-				parse_camera(&scene->camera, line);
-			else if (line[0] == 's')
-				add_shape(scene->shapes, parse_shape(line));
-			else if (line[0] == 'a')
-				scene->ambience = parse_ambiance(line);
-			else if (line[0] == 'l')
-				add_light(scene->lights, parse_light(line));
-		}
+		if (line[1] == '|' && line[0] == 'c')
+			parse_camera(&scene->camera, line);
+		else if (line[1] == '|' && line[0] == 's')
+			add_shape(scene->shapes, parse_shape(line));
+		else if (line[1] == '|' && line[0] == 'a')
+			scene->ambience = parse_ambiance(line);
+		else if (line[1] == '|' && line[0] == 'l')
+			add_light(scene->lights, parse_light(line));
 		else if (!(line[0] == '#') && (strlen(line)))
 			parse_error(line);
-		f_printf("%s\n", line);
 		f_strdel(&line);
 	}
 	if (!(scene->camera.forward.x + scene->camera.forward.y +
 			scene->camera.forward.z))
 		parse_error("No appropriate camera was set");
-
-	//Debugging
-	f_printf("light total: %u\n", scene->lights->total);
-	f_printf("shapes total: %u\n", scene->shapes->total);
 	f_closef(fconfig);
-	f_printf("end\n");
+	f_strdel(&line);
 }

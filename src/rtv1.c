@@ -6,12 +6,11 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/15 16:48:19 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/17 12:02:24 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "gen_scene.h"
 
 static bool	init(void)
 {
