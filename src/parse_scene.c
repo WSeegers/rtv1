@@ -6,57 +6,13 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 12:12:39 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/17 12:06:46 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/20 04:53:54 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_scene.h"
 
-int		parse_splitcount(char **split)
-{
-	int i;
-
-	i = 0;
-	while (split[i])
-		i++;
-	return (i);
-}
-
-void	parse_error(char *line)
-{
-	f_printf("Invalid config: %s\n", line);
-	f_exit(0);
-}
-
-t_vec3	parse_vector(char *s_vector)
-{
-	t_vec3	ret;
-	char	**split;
-
-	split = f_strsplit(s_vector, ',');
-	if (parse_splitcount(split) != 3)
-		parse_error(s_vector);
-	ret.x = f_atof(split[0]);
-	ret.y = f_atof(split[1]);
-	ret.z = f_atof(split[2]);
-	f_strarrdel(split);
-	return (ret);
-}
-
-t_colour	parse_colour(char *s_colour)
-{
-	t_colour	ret;
-	char		**split;
-
-	split = f_strsplit(s_colour, ',');
-	if (parse_splitcount(split) != 3)
-		parse_error(s_colour);
-	ret = colour_get(f_atof(split[0]), f_atof(split[1]), f_atof(split[2]));
-	f_strarrdel(split);
-	return (ret);
-}
-
-void	parse_camera(t_camera *cam, char *s_camera)
+void		parse_camera(t_camera *cam, char *s_camera)
 {
 	char		**split;
 	t_vec3		pos;
@@ -133,7 +89,8 @@ void		parse_scene(t_scene *scene)
 	t_file	*fconfig;
 	char	*line;
 
-	fconfig = f_openf("./scene-config", 'r');
+	if (!(fconfig = f_openf("./scene-config", 'r')))
+		parse_error("./scene-config was not found");
 	while (f_next_line(&line, fconfig))
 	{
 		if (line[1] == '|' && line[0] == 'c')
@@ -148,9 +105,6 @@ void		parse_scene(t_scene *scene)
 			parse_error(line);
 		f_strdel(&line);
 	}
-	if (!(scene->camera.forward.x + scene->camera.forward.y +
-			scene->camera.forward.z))
-		parse_error("No appropriate camera was set");
 	f_closef(fconfig);
 	f_strdel(&line);
 }

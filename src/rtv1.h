@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:58 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/15 16:20:28 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/20 04:35:20 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define LENS_HEIGHT	(atan(FOV))
 # define LENS_WIDTH		(LENS_HEIGHT * ASPECT_RATIO)
 # define UP_GUIDE		(VEC3(0, 1, 0))
+# define ZUP_GUIDE		(VEC3(0, 0, 1))
 
 # define AMBIENT_LIGHT	(COLOUR(0.1, 0.1, 0.1))
 
@@ -53,8 +54,7 @@ typedef struct	s_intersect
 
 # define INTERSECT(r, s, t, c)	((t_intersect){r, s, t, c})
 
-void			generate_screen(t_camera cam, t_vshape_set scene,
-					t_vlight_set light);
+void			generate_screen(t_scene *scene);
 void			putpixel(int x, int y, t_colour pixel);
 void			putipixel(int x, int y, Uint32 pixel);
 

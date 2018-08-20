@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 23:56:25 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 21:40:30 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/20 03:42:52 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static void	set_ray(int x, int y, t_ray *ray, t_camera cam)
 	ray->d = vec3_normalize(vec3_add(vec3_add(fwd, up), right));
 }
 
-void		generate_screen(t_camera cam, t_vshape_set shapes,
-				t_vlight_set lights)
+void		generate_screen(t_scene *scene)
 {
 	int			x;
 	int			y;
@@ -38,16 +37,16 @@ void		generate_screen(t_camera cam, t_vshape_set shapes,
 	t_intersect intersect;
 	t_colour	col;
 
-	ray.p = cam.origin;
+	ray.p = scene->camera.origin;
 	y = -1;
 	while (++y < SCREEN_HEIGHT && (x = -1))
 	{
 		while (++x < SCREEN_WIDTH)
 		{
-			set_ray(x, y, &ray, cam);
+			set_ray(x, y, &ray, scene->camera);
 			col = C_BLACK;
-			if (cast_ray(ray, shapes, &intersect))
-				col = eval_light(intersect, shapes, lights);
+			if (cast_ray(ray, scene->shapes, &intersect))
+				col = eval_light(intersect, scene);
 			putpixel(x, y, col);
 		}
 	}

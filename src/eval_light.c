@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/08 13:32:00 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/08 17:16:44 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/20 04:42:46 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static t_colour	get_diffuse(t_intersect s_intersect, t_intersect l_intersect,
 	return (ret);
 }
 
-t_colour		eval_light(t_intersect s_intersect, t_vshape_set shapes,
-					t_vlight_set lights)
+t_colour		eval_light(t_intersect s_intersect, t_scene *scene)
 {
 	t_intersect		l_intersect;
 	t_colour		ret;
@@ -48,19 +47,18 @@ t_colour		eval_light(t_intersect s_intersect, t_vshape_set shapes,
 	unsigned int	i;
 
 	ret = s_intersect.shape->colour;
-	ret = colour_multiply(ret, AMBIENT_LIGHT);
+	ret = colour_multiply(ret, scene->ambience);
 	i = -1;
-	while (++i < lights->total)
+	while (++i < scene->lights->total)
 	{
-		light = *(get_light(lights, i));
+		light = *(get_light(scene->lights, i));
 		dir = vec3_normalize(vec3_subtract(
 			ray_calculate(s_intersect.ray, s_intersect.t), light.origin));
-		cast_ray(RAY(light.origin, dir), shapes, &l_intersect);
+		cast_ray(RAY(light.origin, dir), scene->shapes, &l_intersect);
 		if (l_intersect.shape == s_intersect.shape)
 		{
 			ret = colour_add(ret, get_diffuse(s_intersect, l_intersect, light));
-			ret = colour_add(ret, get_specular(s_intersect,
-					l_intersect));
+			ret = colour_add(ret, get_specular(s_intersect, l_intersect));
 		}
 	}
 	return (ret);

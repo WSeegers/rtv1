@@ -6,7 +6,7 @@
 /*   By: wseegers <wseegers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 22:26:28 by wseegers          #+#    #+#             */
-/*   Updated: 2018/08/17 12:02:24 by wseegers         ###   ########.fr       */
+/*   Updated: 2018/08/20 03:38:13 by wseegers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			main(void)
 	f_printf("Init scene\n");
 	parse_scene(&scene);
 	f_printf("Generating view, please wait...\n");
-	generate_screen(scene.camera, scene.shapes, scene.lights);
+	generate_screen(&scene);
 	f_printf("Blit\n");
 	SDL_UpdateWindowSurface(g_window);
 	loop();
